@@ -10,9 +10,9 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
-    @poll = params[:id]
-    @in_favor = 5
-    @against = 6
+    @vote = Vote.new(poll_id: params[:id])
+    @in_favor = @poll.votes.where(:in_favor).count
+    @against = @poll.votes.where(!:in_favor).count
   end
 
   # GET /polls/new

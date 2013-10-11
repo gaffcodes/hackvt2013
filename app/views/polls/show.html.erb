@@ -10,10 +10,43 @@
   <%= @poll.question %>
 </p>
 
+<p><strong>In favor:</strong> <%= @in_favor %></p>
+<p><strong>Against:</strong> <%= @against %></p>
+
 <p>
   <strong>Creator:</strong>
   <%= @poll.creator_id %>
 </p>
+
+<%= form_for(@vote) do |f| %>
+  <% if @vote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+      <ul>
+      <% @vote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field" style="display:visible;">
+    <%= f.label :poll_id %><br>
+    <%= f.text_field :poll_id, value: @poll.id %>
+  </div>
+  <div class="field">
+    <%= f.label :in_favor %><br>
+    <%= f.check_box :in_favor %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
