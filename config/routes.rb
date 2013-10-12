@@ -1,4 +1,5 @@
 VtPoll::Application.routes.draw do
+  devise_for :users
   resources :votes
 
   resources :polls

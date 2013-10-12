@@ -3,6 +3,7 @@ class PollsController < ApplicationController
   require 'httparty'
   require 'json'
 
+  before_filter :authorize_legislator!, :except => [:index, :show]
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
 

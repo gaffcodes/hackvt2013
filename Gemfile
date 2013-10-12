@@ -53,3 +53,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#use devise for user authentication
+gem 'devise'
