@@ -1,19 +1,18 @@
-<div style="margin-top: 0px; background-color: #68b9fb;">
-<h1 style="margin-top: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;">
-	<%= params[:id].gsub("_", "") %>: 
-	<%= @title %>
-</h1>
-</div>
-
 <div style="width: 60%; margin: auto;">
   <% if @total_votes > 0 %>
-  <h2 style="text-align:center;margin:auto auto 0px auto;">Total votes: <%= @total_votes %></h2>
+  <% @percent_for = 100 * @for / @total_votes.to_f %>
+  <% @percent_against = 100 * @against / @total_votes.to_f %>
+  <h3 style="color:#aaa;text-align:center;margin:auto auto 0px auto;"><%= @total_votes %> Vermonters care about this issue!</h3>
   <div style="float:left;width:50%;text-align:center;">
-    <h2><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</h2>
+    <h2><strong>In favor:</strong> <%= @percent_for.round %>%</h2>
   </div>
   <div style="float:right;width:50%;;text-align:center;">
-    <h2><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</h2>
+    <h2><strong>Against:</strong> <%= @percent_against.round %>%</h2>
   </div>
+  
+  <div style="margin-bottom: 24px; height: 36px; background-color: #0f0; float:left;width:<%= @percent_for %>%; border-top-left-radius: 18px; border-bottom-left-radius: 18px;"></div>
+  <div style="margin-bottom: 24px; height: 36px; background-color: #f00; float:right;width:<%= @percent_against %>%; border-top-right-radius: 18px; border-bottom-right-radius: 18px;"></div>
+
   <% else %>
     <h2 style="text-align:center;">
       No one has expressed their opinion, yet.
@@ -22,9 +21,10 @@
   <% end %>
 </div>
 
+
 <div>
 
-<div style="float: right; width: 60%;">
+<div style="float: right; width: 64%;">
 
 <p>
 	<b>Sponsored by:</b>
@@ -47,8 +47,9 @@
 <%= form_for(@vote) do |f| %>
 
 <div class="field">
-  <%= f.check_box :in_favor %>
-  <%= f.label :in_favor, "I support this bill!" %>
+  <input id="vote_in_favor" name="vote[in_favor]" type="radio" value="1" /> I support this bill.
+  <br/>
+  <input id="vote_against" name="vote[in_favor]" type="radio" value="0" /> I'm against this bill.
 </div>
 
   <% if @vote.errors.any? %>
@@ -78,7 +79,7 @@
   </div>
 
   <div class="field">
-    <%= f.text_field :zip, class: "rounded", placeholder: "Zip Code"  %>
+    <%= f.text_field :zip, class: "text-input rounded", placeholder: "Zip Code"  %>
   </div>
 
   <div class="actions">

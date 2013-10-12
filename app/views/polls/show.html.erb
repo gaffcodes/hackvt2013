@@ -1,10 +1,3 @@
-<div style="margin-top: 0px; background-color: #68b9fb;">
-<h1 style="margin-top: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;">
-  <%= @poll.bill.gsub("_", "") %>: 
-  <%= @title %>
-</h1>
-</div>
-
 <div style="width: 60%; margin: auto;">
   <% if @total_votes > 0 %>
   <% @percent_for = 100 * @for / @total_votes.to_f %>
@@ -17,8 +10,8 @@
     <h2><strong>Against:</strong> <%= @percent_against.round %>%</h2>
   </div>
   
-  <div style="margin-bottom: 24px; height: 36px; background-color: #0f0; float:left;width:<%= @percent_for %>%;"></div>
-  <div style="margin-bottom: 24px; height: 36px; background-color: #f00; float:right;width:<%= @percent_against %>%;"></div>
+  <div style="margin-bottom: 24px; height: 36px; background-color: #0f0; float:left;width:<%= @percent_for %>%; border-top-left-radius: 18px; border-bottom-left-radius: 18px;"></div>
+  <div style="margin-bottom: 24px; height: 36px; background-color: #f00; float:right;width:<%= @percent_against %>%; border-top-right-radius: 18px; border-bottom-right-radius: 18px;"></div>
 
   <% else %>
     <h2 style="text-align:center;">
@@ -29,7 +22,7 @@
 </div>
 <div>
 
-<div style="float: right; width: 60%;">
+<div style="float: right; width: 64%;">
 
 <h2>Representative Sue Somers says:<h2/>
 <h3>"<%= @poll.question %>"</h3>
@@ -48,8 +41,13 @@
 <%= form_for(@vote) do |f| %>
 
 <div class="field">
-  <%= f.check_box :in_favor %>
-  <%= f.label :in_favor, "I support this bill!" %>
+
+</div>
+
+<div class="field">
+  <input id="vote_in_favor" name="vote[in_favor]" type="radio" value="1" checked/> I support this bill.
+  <br/>
+  <input id="vote_against" name="vote[in_favor]" type="radio" value="0" /> I'm against this bill.
 </div>
 
   <% if @vote.errors.any? %>
@@ -79,7 +77,7 @@
   </div>
 
   <div class="field">
-    <%= f.text_field :zip, class: "rounded", placeholder: "Zip Code"  %>
+    <%= f.text_field :zip, class: "text-input rounded", placeholder: "Zip Code"  %>
   </div>
 
   <div class="actions">
@@ -91,3 +89,7 @@
 </div>
 
 </div>
+
+<script>
+
+</script>
