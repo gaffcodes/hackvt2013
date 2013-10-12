@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
     if user_signed_in? && current_user.type=="l"
       return
     elsif user_signed_in?
-      flash[:notice] = 'You must be a legislator to perform this action'
-      redirect_to :root
+      #flash[:notice] = 'You must be a legislator to perform this action'
+      #redirect_to :root
+      return
     else
       flash[:notice] = 'You need to sign in first'
       redirect_to new_user_session_path
