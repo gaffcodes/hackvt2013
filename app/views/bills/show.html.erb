@@ -25,16 +25,18 @@
 <div>
 
 <div class="right">
-  
+
 <% if @comments %>
   <% @comments.each do |comment| %>
+    <h3>
     <% if comment.user_id %>
       <% @user = User.find(comment.user_id) %>
-      <h2><%= @user.name %> says:<h2/>
+        <%= @user.name %> says:
     <% else %>
-      <h2>Anonymous says:</h2>
+      Anonymous says:
     <% end %>
-  <h3>"<%= comment.text %>"</h3>
+  <span style="color:#999;">"<%= comment.text %>"</span>
+  </h3>
   <hr />
   <% end %>
 <% end %>

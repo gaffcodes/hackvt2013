@@ -23,19 +23,29 @@
 <div>
 
 <div class="right">
-<% @comments.each do |comment| %>
-	<% if comment.user_id %>
-    <% @user = User.find(comment.user_id) %>
-    <h2><%= @user.name %> says:<h2/>
-  <% else %>
-    <h2>Anonymous says:</h2>
+
+<% if @poll.creator_id > 0 %>
+<h3>Poll created by <%= User.find(@poll.creator_id).name %></h3>
+<% end %>
+<h2><%= @poll.question %></h2>
+
+<% if @comments %>
+  <% @comments.each do |comment| %>
+    <h3>
+  	<% if comment.user_id %>
+      <% @user = User.find(comment.user_id) %>
+        <%= @user.name %> says:
+    <% else %>
+      Anonymous says:
+    <% end %>
+  <span style="color:#999;">"<%= comment.text %>"</span>
+  </h3>
+  <hr />
   <% end %>
-<h3>"<%= comment.text %>"</h3>
-<hr />
 <% end %>
 
 <p>
-  <%= link_to "Comment and have your voice heard", "/comments/new" %><br />
+  
   <%= link_to "Find out more about this bill", @link, target: "_blank" %>
   <hr/>
 </p>
