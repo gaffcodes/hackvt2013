@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20131012050817) do
     t.integer  "poll_id"
     t.string   "email"
     t.string   "zip"
+    t.string   "bill_id"
   end
 
 end
