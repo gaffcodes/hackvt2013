@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Bill:</strong>
-  <%= @poll.bill %>
-</p>
+<h1 style="text-align:center;">
+  <strong><%= @poll.bill %>: <%= @poll.question %></strong>
+</h1>
 
-<p>
-  <strong>Question:</strong>
-  <%= @poll.question %>
-</p>
-
-<p><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</p>
-<p><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</p>
+<div style="width: 50%; margin: auto;">
+	<div style="float:left;width:50%;text-align:center;">
+		<h2><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</h2>
+	</div>
+	<div style="float:right;width:50%;;text-align:center;">
+		<h2><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</h2>
+	</div>
+</div>
 
 <p>
   <strong>Creator:</strong>
@@ -38,13 +38,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, placeholder: "Email" %>
   </div>
 
   <div class="field">
-    <%= f.label :zip, "Zip Code" %><br>
-    <%= f.text_field :zip %>
+    <%= f.text_field :zip, placeholder: "Zip Code"  %>
   </div>
 
   <div class="field">
