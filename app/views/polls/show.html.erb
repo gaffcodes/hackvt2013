@@ -10,8 +10,8 @@
   <%= @poll.question %>
 </p>
 
-<p><strong>In favor:</strong> <%= @for %></p>
-<p><strong>Against:</strong> <%= @against %></p>
+<p><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</p>
+<p><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</p>
 
 <p>
   <strong>Creator:</strong>
@@ -32,7 +32,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field" style="display:none;">
     <%= f.label :poll_id %><br>
     <%= f.text_field :poll_id %>
   </div>
@@ -51,9 +51,9 @@
     <%= f.check_box :in_favor %>
     <%= f.label :in_favor, "I support this bill!" %>
   </div>
-  
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Vote!", style: "background-color:#fff; height: 32px; width: 64px;" %>
   </div>
 <% end %>
 

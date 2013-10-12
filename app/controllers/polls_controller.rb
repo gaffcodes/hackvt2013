@@ -12,6 +12,7 @@ class PollsController < ApplicationController
   def show
     @vote = Vote.new
     @vote.poll_id = @poll.id
+    @total_votes = @poll.votes.count
     @for = @poll.votes.for.count
     @against = @poll.votes.against.count
   end
