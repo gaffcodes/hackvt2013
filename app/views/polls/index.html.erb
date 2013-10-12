@@ -1,31 +1,38 @@
-<h1>Listing polls</h1>
+<h1>Welcome to Demos!</h1>
+
+<div style="width: 60%; margin: auto;">
 
 <table>
   <thead>
     <tr>
       <th>Bill</th>
-      <th>Question</th>
-      <th>Creator</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th width=40%>Title</th>
+      <th width=40%>Authors</th>
+      <th>Link</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @polls.each do |poll| %>
+    <% @polls.each_with_index do |poll, index| %>
       <tr>
-        <td><%= poll.bill %></td>
-        <td><%= poll.question %></td>
-        <td><%= poll.creator_id %></td>
-        <td><%= link_to 'Show', poll %></td>
-        <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
-        <td><%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to poll.bill, poll %></td>
+        <td><%= @titles[index] %></td>
+        <td>
+        <% @authors[index].each do |author| %>
+      <a href="/polls"><%= author['name'] %></a>, 
+    <% end %>
+        </td>
+        <td>View bill:<i><%= @links[index] %></i></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+</div>
+
+<div class="right" style="">
+
+</div>
 <br>
 
 <%= link_to 'New Poll', new_poll_path %>

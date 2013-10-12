@@ -98,11 +98,16 @@ input {
 <div style="max-width: 1024px; padding: 24px; margin: auto; background-color: #fff;">
 <div style="min-height: 600px;">
 
-<% if notice %>
-	<p class="alert alert-notice"><%= notice %></p>
+<% if flash[:notice] %>
+<h2 style="text-align:center;color:#7f7;">
+  <%= flash[:notice] %><br/>
+</h2>
 <% end %>
-<% if alert %>
-	<p class="alert alert-error"><%= alert %></p>
+
+<% if flash[:error] %>
+<h2 style="text-align:center;color:#f77;">
+  <%= flash[:error] %><br/>
+</h2>
 <% end %>
 
 <%= yield %>

@@ -9,8 +9,21 @@ class PollsController < ApplicationController
 
   # GET /polls
   # GET /polls.json
-  def index
-    @polls = Poll.all
+def index
+  @polls = Poll.all
+  @titles = []
+  @links = []
+  @authors = []
+  @polls.each do |poll|
+    bill = poll.bill.gsub('_', '%20')
+    @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + bill + "?apikey=6ecd5cf05848442289647eae66e51a17"
+    @results = HTTParty.get(@uri)
+    @titles << JSON.parse(@results.body)["title"].to_s
+    puts @titles
+    @links << JSON.parse(@results.body)["sources"][0]["url"]
+    puts @links
+    @authors << JSON.parse(@results.body)["sponsors"]
+  end
   end
 
   # GET /polls/1
