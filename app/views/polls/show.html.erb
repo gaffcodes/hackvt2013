@@ -24,7 +24,7 @@
 
 <div class="right">
 
-<% if @poll.creator_id > 0 %>
+<% if @poll.creator_id && @poll.creator_id > 0 %>
 <h3>Poll created by <%= User.find(@poll.creator_id).name %></h3>
 <% end %>
 <h2><%= @poll.question %></h2>
