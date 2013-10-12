@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012004352) do
+ActiveRecord::Schema.define(version: 20131012040135) do
 
   create_table "polls", force: true do |t|
     t.string   "bill"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20131012004352) do
     t.integer  "poll_id"
     t.string   "email"
     t.string   "zip"
+    t.string   "bill_id"
   end
 
 end

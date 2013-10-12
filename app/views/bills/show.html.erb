@@ -1,5 +1,92 @@
-<p><b><%= @uri %></b></p>
+<div style="margin-top: 0px; background-color: #68b9fb;">
+<h1 style="margin-top: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;">
+	<%= params[:id].gsub("_", "") %>: 
+	<%= @title %>
+</h1>
+</div>
 
-<% @results.each do |k,v| %>
-<p><b><%= k %>:</b> <%= v %></p>
+<div style="width: 60%; margin: auto;">
+  <% if @total_votes > 0 %>
+  <h2 style="text-align:center;margin:auto auto 0px auto;">Total votes: <%= @total_votes %></h2>
+  <div style="float:left;width:50%;text-align:center;">
+    <h2><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</h2>
+  </div>
+  <div style="float:right;width:50%;;text-align:center;">
+    <h2><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</h2>
+  </div>
+  <% else %>
+    <h2 style="text-align:center;">
+      No one has expressed their opinion, yet.
+      <br/><b>Why don't you be the first?</b>
+    </h2>
+  <% end %>
+</div>
+
+<div>
+
+<div style="float: right; width: 60%;">
+
+<p>
+	<b>Sponsored by:</b>
+	<% (0...@authors.length-1).each do |n| %>
+		<%= @authors[n]["name"].split(", ").reverse.join(" ") %>, 
+	<% end %>
+	<% if @authors.length > 1 %>and <% end %><%= @authors.last["name"].split(", ").reverse.join(" ") %>
+</p>
+<p>
+  <%= link_to "Find out more about this bill", @link, target: "_blank" %>
+  <hr/>
+</p>
+
+</div>
+
+<div style="float: left; width: 33%; box-shadow: 0px 0px 5px #aaa;">
+<div style="padding: 12px;">
+<h2>What do you think?</h2>
+
+<%= form_for(@vote) do |f| %>
+
+<div class="field">
+  <%= f.check_box :in_favor %>
+  <%= f.label :in_favor, "I support this bill!" %>
+</div>
+
+  <% if @vote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+      <ul>
+      <% @vote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style="display:none;">
+    <%= f.label :poll_id %><br>
+    <%= f.text_field :poll_id %>
+  </div>
+
+  <div class="field" style="display:none;">
+    <%= f.label :bill_id %><br>
+    <%= f.text_field :bill_id %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :email, class: "text-input rounded", placeholder: "Email" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :zip, class: "rounded", placeholder: "Zip Code"  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Vote!", style: "color: #fff; background-color:#aaa; height: 48px; width: 128px; font-size: 24px; border: solid 0px black; cursor: pointer;" %>
+  </div>
 <% end %>
+</div>
+
+</div>
+
+</div>

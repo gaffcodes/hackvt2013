@@ -1,30 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<h1 style="text-align:center;">
-  <strong><%= @poll.bill %>: <%= @poll.question %></strong>
+<div style="margin-top: 0px; background-color: #68b9fb;">
+<h1 style="margin-top: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;">
+  <%= @poll.bill.gsub("_", "") %>: 
+  <%= @title %>
 </h1>
-
-<div style="width: 50%; margin: auto;">
-	<div style="float:left;width:50%;text-align:center;">
-		<h2><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</h2>
-	</div>
-	<div style="float:right;width:50%;;text-align:center;">
-		<h2><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</h2>
-	</div>
 </div>
 
+<div style="width: 60%; margin: auto;">
+  <% if @total_votes > 0 %>
+  <% @percent_for = 100 * @for / @total_votes.to_f %>
+  <% @percent_against = 100 * @against / @total_votes.to_f %>
+  <h3 style="color:#aaa;text-align:center;margin:auto auto 0px auto;"><%= @total_votes %> Vermonters care about this issue!</h3>
+  <div style="float:left;width:50%;text-align:center;">
+    <h2><strong>In favor:</strong> <%= @percent_for.round %>%</h2>
+  </div>
+  <div style="float:right;width:50%;;text-align:center;">
+    <h2><strong>Against:</strong> <%= @percent_against.round %>%</h2>
+  </div>
+  
+  <div style="margin-bottom: 24px; height: 36px; background-color: #0f0; float:left;width:<%= @percent_for %>%;"></div>
+  <div style="margin-bottom: 24px; height: 36px; background-color: #f00; float:right;width:<%= @percent_against %>%;"></div>
+
+  <% else %>
+    <h2 style="text-align:center;">
+      No one has expressed their opinion, yet.
+      <br/><b>Why don't you be the first?</b>
+    </h2>
+  <% end %>
+</div>
+<div>
+
+<div style="float: right; width: 60%;">
+
+<h2>Representative Sue Somers says:<h2/>
+<h3>"<%= @poll.question %>"</h3>
+
 <p>
-  <strong>Creator:</strong>
-  <%= @author %>
+  <%= link_to "Find out more about this bill", @link, target: "_blank" %>
+  <hr/>
 </p>
 
-<p><%= link_to "Read more...", @link, target: "_blank" %></p>
+</div>
 
-<% @results.each do |k,v| %>
-<p><b><%= k %>:</b> <%= v %></p>
-<% end %>
+<div style="float: left; width: 33%; box-shadow: 0px 0px 5px #aaa;">
+<div style="padding: 12px;">
+<h2>What do you think?</h2>
 
 <%= form_for(@vote) do |f| %>
+
+<div class="field">
+  <%= f.check_box :in_favor %>
+  <%= f.label :in_favor, "I support this bill!" %>
+</div>
 
   <% if @vote.errors.any? %>
     <div id="error_explanation">
@@ -43,23 +69,25 @@
     <%= f.text_field :poll_id %>
   </div>
 
-  <div class="field">
-    <%= f.text_field :email, placeholder: "Email" %>
+  <div class="field" style="display:none;">
+    <%= f.label :bill_id %><br>
+    <%= f.text_field :bill_id %>
   </div>
 
   <div class="field">
-    <%= f.text_field :zip, placeholder: "Zip Code"  %>
+    <%= f.text_field :email, class: "text-input rounded", placeholder: "Email" %>
   </div>
 
   <div class="field">
-    <%= f.check_box :in_favor %>
-    <%= f.label :in_favor, "I support this bill!" %>
+    <%= f.text_field :zip, class: "rounded", placeholder: "Zip Code"  %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Vote!", style: "background-color:#fff; height: 32px; width: 64px;" %>
+    <%= f.submit "Vote!", style: "color: #fff; background-color:#aaa; height: 48px; width: 128px; font-size: 24px; border: solid 0px black; cursor: pointer;" %>
   </div>
 <% end %>
+</div>
 
-<%= link_to 'Edit', edit_poll_path(@poll) %> |
-<%= link_to 'Back', polls_path %>
+</div>
+
+</div>

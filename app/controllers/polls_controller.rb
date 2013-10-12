@@ -15,16 +15,19 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
-    #@results = HTTParty.get("http://openstates.org/api/v1/bills/?state=vt&bill_id=H%20405&apikey=6ecd5cf05848442289647eae66e51a17")
-    @results = HTTParty.get("http://openstates.org/api/v1/bills/vt/2013-2014/H%20405?apikey=6ecd5cf05848442289647eae66e51a17")
-    # @author = JSON.parse(@results.body)
-    @author = JSON.parse(@results.body)["sponsors"][0]["name"]
-    @link = JSON.parse(@results.body)["sources"][0]["url"]
     @vote = Vote.new
-    @vote.poll_id = @poll.id
-    @total_votes = @poll.votes.count
-    @for = @poll.votes.for.count
-    @against = @poll.votes.against.count
+    @vote.poll_id = params[:id]
+    @vote.bill_id = @poll.bill
+    @total_votes = Vote.where("bill_id = '#{@poll.bill}'").count
+    @for = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 't'").count
+    @against = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 'f'").count
+
+    @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + @poll.bill.gsub('_','%20') + "?apikey=6ecd5cf05848442289647eae66e51a17"
+    puts @uri
+    @results = HTTParty.get(@uri)
+    @title = JSON.parse(@results.body)["title"]
+    @link = JSON.parse(@results.body)["sources"][0]["url"]
+    @authors = JSON.parse(@results.body)["sponsors"]
   end
 
   # GET /polls/new

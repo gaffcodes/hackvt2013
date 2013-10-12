@@ -5,6 +5,7 @@ gem 'rails', '4.0.0'
 gem 'protected_attributes'
 gem 'httparty'
 gem 'json'
+# gem 'client_side_validations'
 
 # Use sqlite3 as the database for Active Record
 
