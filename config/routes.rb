@@ -1,10 +1,15 @@
 VtPoll::Application.routes.draw do
-  devise_for :users
   resources :votes
 
   resources :polls
 
+  resources :comments
+  
+  resources :comment_polls
+  
   match "/bills/:id" => 'bills#show', via: :GET
+
+  devise_for :users, controllers: {registrations: "users/registrations"}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

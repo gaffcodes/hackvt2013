@@ -15,7 +15,7 @@
 
   <% else %>
     <h2 style="text-align:center;">
-      No one has expressed their opinion, yet.
+      No one has voted, yet.
       <br/><b>Why don't you be the first?</b>
     </h2>
   <% end %>
@@ -23,11 +23,16 @@
 <div>
 
 <div style="float: right; width: 64%;">
+<% @comments.each do |comment| %>
+	<% @user = User.find(comment.user_id) %>
+	<h2><%= @user.name %> says:<h2/>
+<h3>"<%= comment.text %>"</h3>
 
-<h2>Representative Sue Somers says:<h2/>
-<h3>"<%= @poll.question %>"</h3>
+<% end %>
 
 <p>
+  <hr />
+  <%= link_to "Comment and have your voice heard", "/comments/new" %><br />
   <%= link_to "Find out more about this bill", @link, target: "_blank" %>
   <hr/>
 </p>

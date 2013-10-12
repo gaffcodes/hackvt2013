@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012050817) do
+ActiveRecord::Schema.define(version: 20131012133707) do
+
+  create_table "comment_polls", force: true do |t|
+    t.string   "user"
+    t.string   "bill"
+    t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comment_id"
+  end
+
+  create_table "comments", force: true do |t|
+    t.string   "bill"
+    t.string   "text"
+    t.string   "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "poll_id"
+    t.string   "user_id"
+  end
 
   create_table "polls", force: true do |t|
     t.string   "bill"
@@ -39,6 +58,7 @@ ActiveRecord::Schema.define(version: 20131012050817) do
     t.integer  "featured"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

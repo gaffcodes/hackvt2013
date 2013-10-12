@@ -19,6 +19,7 @@ class PollsController < ApplicationController
     @vote = Vote.new
     @vote.poll_id = params[:id]
     @vote.bill_id = @poll.bill
+    @vote.user_id = current_user.id
     @total_votes = Vote.where("bill_id = '#{@poll.bill}'").count
     @for = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 't'").count
     @against = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 'f'").count
@@ -30,6 +31,10 @@ class PollsController < ApplicationController
     @title = @poll.bill.gsub('_',' ') + ": " +  JSON.parse(@results.body)["title"].to_s
     @link = JSON.parse(@results.body)["sources"][0]["url"]
     @authors = JSON.parse(@results.body)["sponsors"]
+    
+    #display comments somehow
+    @comments = Comment.where("poll_id = '#{@poll.id}'")
+    
   end
 
   # GET /polls/new

@@ -1,0 +1,33 @@
+<h1>Listing Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bill</th>
+      <th>Text</th>
+      <th>Commenter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+    	<% poll = Poll.find(comment.poll_id) %>
+		<% bill = poll.bill %>
+		<% text = comment.text %>
+      <tr>
+        <td><%= bill %></td>
+        <td><%= text %></td>
+        <td><%= @user.name %></td>
+        <td><%= link_to 'Show', comment %></td>
+        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>
