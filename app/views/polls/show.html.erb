@@ -15,8 +15,14 @@
 
 <p>
   <strong>Creator:</strong>
-  <%= @poll.creator_id %>
+  <%= @author %>
 </p>
+
+<p><%= link_to "Read more...", @link, target: "_blank" %></p>
+
+<% @results.each do |k,v| %>
+<p><b><%= k %>:</b> <%= v %></p>
+<% end %>
 
 <%= form_for(@vote) do |f| %>
 

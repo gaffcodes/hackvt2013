@@ -3,6 +3,8 @@ VtPoll::Application.routes.draw do
 
   resources :polls
 
+  match "/bills/:id" => 'bills#show', via: :GET
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

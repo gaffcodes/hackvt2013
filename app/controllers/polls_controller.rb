@@ -1,5 +1,10 @@
 class PollsController < ApplicationController
+
+  require 'httparty'
+  require 'json'
+
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
+
 
   # GET /polls
   # GET /polls.json
@@ -10,6 +15,11 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
+    #@results = HTTParty.get("http://openstates.org/api/v1/bills/?state=vt&bill_id=H%20405&apikey=6ecd5cf05848442289647eae66e51a17")
+    @results = HTTParty.get("http://openstates.org/api/v1/bills/vt/2013-2014/H%20405?apikey=6ecd5cf05848442289647eae66e51a17")
+    # @author = JSON.parse(@results.body)
+    @author = JSON.parse(@results.body)["sponsors"][0]["name"]
+    @link = JSON.parse(@results.body)["sources"][0]["url"]
     @vote = Vote.new
     @vote.poll_id = @poll.id
     @total_votes = @poll.votes.count
