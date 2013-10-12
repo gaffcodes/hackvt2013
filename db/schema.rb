@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011230907) do
+ActiveRecord::Schema.define(version: 20131012004352) do
 
   create_table "polls", force: true do |t|
     t.string   "bill"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20131011230907) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "poll_id"
+    t.string   "email"
+    t.string   "zip"
   end
 
 end

@@ -10,9 +10,9 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
-    @vote = Vote.new()
+    @vote = Vote.new
     @vote.poll_id = @poll.id
-    @in_favor = @poll.votes.in_favor.count
+    @for = @poll.votes.for.count
     @against = @poll.votes.against.count
   end
 
