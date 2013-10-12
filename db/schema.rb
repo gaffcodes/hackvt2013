@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012133707) do
+ActiveRecord::Schema.define(version: 20131012163706) do
 
   create_table "comment_polls", force: true do |t|
     t.string   "user"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131012133707) do
     t.datetime "updated_at"
     t.integer  "poll_id"
     t.string   "user_id"
+    t.string   "user_email"
   end
 
   create_table "polls", force: true do |t|
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 20131012133707) do
     t.string   "email"
     t.string   "zip"
     t.string   "bill_id"
+    t.string   "comment_text"
   end
 
 end

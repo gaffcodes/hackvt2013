@@ -62,7 +62,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:poll, :text, :user_id, :date)
+      params.require(:comment).permit(:poll, :text, :user_id, :user_email, :date)
     end
 
 end

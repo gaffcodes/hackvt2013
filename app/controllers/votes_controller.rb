@@ -26,12 +26,27 @@ class VotesController < ApplicationController
   def create
     @vote = Vote.new(vote_params)
 
+    unless current_user
+      @user = User.new
+      @user.email = @vote.email
+      @user.save
+      current_user = @user
+    end
+
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
+        if @vote.comment_text
+          @comment = Comment.new
+          @comment.user_email = @vote.email
+          @comment.text = @vote.comment_text
+          @comment.bill = @vote.bill_id
+          @comment.poll_id = @vote.poll_id
+          @comment.save
+        end
+        format.html { redirect_to :back, notice: 'Thanks for your vote!' }
         format.json { render action: 'show', status: :created, location: @vote }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to :back, notice: 'Thanks for your vote!' }
         format.json { render json: @vote.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +84,6 @@ class VotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vote_params
-      params.require(:vote).permit(:user_id, :in_favor, :email, :zip, :poll_id, :bill_id)
+      params.require(:vote).permit(:user_id, :in_favor, :email, :zip, :poll_id, :bill_id, :comment_text)
     end
 end

@@ -35,7 +35,12 @@
 </p>
 <p>
   <%= link_to "Find out more about this bill", @link, target: "_blank" %>
-  <hr/>
+</p>
+<p>
+  Comments:
+  <% @comments.each do |comment| %>
+    <br/><%= comment.text %>
+  <% end %>
 </p>
 
 </div>

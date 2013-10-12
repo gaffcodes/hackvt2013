@@ -22,19 +22,20 @@
 </div>
 <div>
 
+<<<<<<< HEAD
 <div style="float: right; width: 64%;">
 <% @comments.each do |comment| %>
-	<% if comment.user_id %>
-    <% @user = User.find(comment.user_id) %>
-    <h2><%= @user.name %> says:<h2/>
-  <% else %>
-    <h2>Anonymous says:</h2>
-  <% end %>
+	<% @user = User.find(comment.user_id) %>
+	<h2><%= @user.name %> says:<h2/>
 <h3>"<%= comment.text %>"</h3>
-<hr />
+=======
+<div class="right" style="">
+>>>>>>> aaroun_dev
+
 <% end %>
 
 <p>
+  <hr />
   <%= link_to "Comment and have your voice heard", "/comments/new" %><br />
   <%= link_to "Find out more about this bill", @link, target: "_blank" %>
   <hr/>
@@ -42,7 +43,7 @@
 
 </div>
 
-<div style="float: left; width: 33%; box-shadow: 0px 0px 5px #aaa;">
+<div class="left" style="">
 <div style="padding: 12px;">
 <h2>What do you think?</h2>
 
@@ -86,11 +87,6 @@
 
   <div class="field">
     <%= f.text_field :zip, class: "text-input rounded", placeholder: "Zip Code"  %>
-  </div>
-
-  <div class="field">
-    <textarea class="text-input rounded" cols="24" id="vote_comment_text" name="vote[comment_text]" placeholder="Comment (optional)" rows="6">
-</textarea>
   </div>
 
   <div class="actions">

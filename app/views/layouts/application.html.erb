@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body style="padding: 0px; margin: 0px; max-width: 1000px; background-color: #ddd;">
+<body style="padding: 0px; margin: 0px; background-color: #ddd;">
 
-<div id="secondaryContent">
+<div style="max-width: 1000px; margin: auto;">
+
+<div id="secondaryContent" style="background-color: #fff; padding: 8px; margin:0px;">
 	<%= render 'common/session' %>
 </div>
 
@@ -43,6 +45,49 @@
 </p>
 
 </div>
+
+</div>
+
+<img src="http://i.imgur.com/Jvgnd1Q.jpg" style="width:100%; opacity: 0.5;" />
+
+<script>
+
+function isValidUSZip(sZip) {
+   return /^\d{5}(-\d{4})?$/.test(sZip);
+}
+
+function isValidEmail(email) { 
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+} 
+
+$("#new_vote").submit(function( event ) {
+  var email = $("#vote_email").val();
+  var zip = $("#vote_zip").val();
+  if (isValidEmail(email) == false) {
+    $("#vote_email").val("");
+    $("#vote_email").attr("placeholder","Email is invalid");
+    $("#vote_email").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if ( email == "") {
+    $("#vote_email").attr("placeholder","Required");
+    $("#vote_email").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if (isValidUSZip(zip) == false) {
+    $("#vote_zip").val("");
+    $("#vote_zip").attr("placeholder","Zip code is invalid");
+    $("#vote_zip").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if ( zip == "") {
+    $("#vote_zip").attr("placeholder","Required");
+    $("#vote_zip").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+});
+</script>
+
 
 </body>
 </html>

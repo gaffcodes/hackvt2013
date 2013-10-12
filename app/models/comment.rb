@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 	
 	has_many :comment_polls
 	
-	validates_presence_of :user_id
+	validates_presence_of :user_email
 	
-	attr_accessible :user_id, :poll_id, :text, :created_at, :updated_at
+	attr_accessible :user_id, :poll_id, :text, :created_at, :updated_at, :user_email
 end
