@@ -6,6 +6,77 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 
+<style>
+body, p {
+  font-size: 16px !important;
+  font-family: Ariel, Helvetica;
+}
+
+h2 {
+  line-height: 1.2em;
+  margin-top: 0px;
+}
+
+html {
+  background-color: #ddd;
+}
+
+body {
+  min-height: 600px;
+  margin-top: 0px;
+  padding: 12px;
+  background-color: #fff;
+}
+
+.text-input {
+  min-width: 200px;
+  width: 94%;
+  font-size: 18px;
+}
+
+.rounded {
+  min-height: 35px;
+  padding-left: 8px !important;
+  border: solid 1px #999;
+  box-shadow: inset 0px 4px 8px #ddd;
+}
+input[type=checkbox] {
+  min-height: 0px;
+  width: auto;
+  border: none;
+  box-shadow: none;
+}
+input:hover, input:focus, textarea:hover, textarea:focus {
+  border-color: #2583D4;
+}
+input {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.rounded {
+  border-radius: 18px;
+}
+.btn, .btn:hover {
+  padding: 8px !important;
+  font-size: 18px;
+  font-family: 'Brown-Bold';
+  color: #fff;
+  background-color: #206db0;
+  background-image: linear-gradient(#206db0 0%,#185386 100%);
+}
+
+@media (min-width:751px) {
+  .right {float: right; width: 64%;}
+  .left {float: left; width: 33%; box-shadow: 0px 0px 5px #aaa;}
+}
+
+@media (max-width:750px) {
+  .monitor {display: none;}
+}
+
+
+</style>
+
 </head>
 <body style="padding: 0px; margin: 0px; background-color: #ddd;">
 
@@ -16,7 +87,8 @@
 </div>
 
 <% if @title %>
-<div style="margin-top: 0px; background-color: #68b9fb;">
+<div style="margin-top: 0px; background-color: #5588cc;">
+  <img class="monitor" src="http://i.imgur.com/THa9tYB.png" style="width:100%; opacity: 0.75;" />
 <h1 style="margin: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;"> 
 	<%= @title %>
 </h1>
