@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1 style="text-align:center;">
+  <strong><%= @poll.bill %>: <%= @poll.question %></strong>
+</h1>
+
+<div style="width: 50%; margin: auto;">
+	<div style="float:left;width:50%;text-align:center;">
+		<h2><strong>In favor:</strong> <%= 100 * @for / @total_votes %>%</h2>
+	</div>
+	<div style="float:right;width:50%;;text-align:center;">
+		<h2><strong>Against:</strong> <%= 100 * @against / @total_votes %>%</h2>
+	</div>
+</div>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @author %>
+</p>
+
+<p><%= link_to "Read more...", @link, target: "_blank" %></p>
+
+<% @results.each do |k,v| %>
+<p><b><%= k %>:</b> <%= v %></p>
+<% end %>
+
+<%= form_for(@vote) do |f| %>
+
+  <% if @vote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+      <ul>
+      <% @vote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style="display:none;">
+    <%= f.label :poll_id %><br>
+    <%= f.text_field :poll_id %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :email, placeholder: "Email" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :zip, placeholder: "Zip Code"  %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :in_favor %>
+    <%= f.label :in_favor, "I support this bill!" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Vote!", style: "background-color:#fff; height: 32px; width: 64px;" %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_poll_path(@poll) %> |
+<%= link_to 'Back', polls_path %>
