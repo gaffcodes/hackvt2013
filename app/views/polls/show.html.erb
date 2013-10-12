@@ -19,6 +19,7 @@
 </p>
 
 <%= form_for(@vote) do |f| %>
+
   <% if @vote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
@@ -35,10 +36,7 @@
     <%= f.label :user_id %><br>
     <%= f.text_field :user_id %>
   </div>
-  <div class="field" style="display:visible;">
-    <%= f.label :poll_id %><br>
-    <%= f.text_field :poll_id, value: @poll.id %>
-  </div>
+
   <div class="field">
     <%= f.label :in_favor %><br>
     <%= f.check_box :in_favor %>
