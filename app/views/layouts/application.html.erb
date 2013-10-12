@@ -7,17 +7,42 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body style="max-width: 1000px; margin: auto;">
-	<div id="secondaryContent">
-		<%= render 'common/session' %>
-	</div>
-	<% if notice %>
+<body style="padding: 0px; margin: 0px; max-width: 1000px; background-color: #ddd;">
+
+<div id="secondaryContent">
+	<%= render 'common/session' %>
+</div>
+
+<% if @title %>
+<div style="margin-top: 0px; background-color: #68b9fb;">
+<h1 style="margin: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;"> 
+	<%= @title %>
+</h1>
+</div>
+<% end %>
+
+<div style="max-width: 1024px; padding: 24px; margin: auto; background-color: #fff;">
+<div style="min-height: 600px;">
+
+<% if notice %>
 	<p class="alert alert-notice"><%= notice %></p>
-	<% end %>
-	<% if alert %>
+<% end %>
+<% if alert %>
 	<p class="alert alert-error"><%= alert %></p>
-	<% end %>
-	<%= yield %>
+<% end %>
+
+<%= yield %>
+
+</div>
+
+<hr/>
+
+<p style="text-align: right;">
+	<a href="https://github.com/mg41/hackvt2013" target="_blank">About</a>
+	 | <a href="https://github.com/mg41/hackvt2013" target="_blank">Github</a>
+</p>
+
+</div>
 
 </body>
 </html>
