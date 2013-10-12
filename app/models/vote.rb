@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
 
 	validates_presence_of :email, :zip
 
-	scope :for, where("in_favor == 't'")
-	scope :against, where("in_favor == 'f'")
+	scope :for, where("in_favor = 't'")
+	scope :against, where("in_favor = 'f'")
 
 end
