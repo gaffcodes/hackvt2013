@@ -5,10 +5,166 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
+<style>
+body, p {
+  font-size: 16px !important;
+  font-family: Ariel, Helvetica;
+}
+
+h2 {
+  line-height: 1.2em;
+  margin-top: 0px;
+}
+
+html {
+  background-color: #ddd;
+}
+
+body {
+  min-height: 600px;
+  margin-top: 0px;
+  padding: 12px;
+  background-color: #fff;
+}
+
+.text-input {
+  min-width: 200px;
+  width: 94%;
+  font-size: 18px;
+}
+
+.rounded {
+  min-height: 35px;
+  padding-left: 8px !important;
+  border: solid 1px #999;
+  box-shadow: inset 0px 4px 8px #ddd;
+}
+input[type=checkbox] {
+  min-height: 0px;
+  width: auto;
+  border: none;
+  box-shadow: none;
+}
+input:hover, input:focus, textarea:hover, textarea:focus {
+  border-color: #2583D4;
+}
+input {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.rounded {
+  border-radius: 18px;
+}
+.btn, .btn:hover {
+  padding: 8px !important;
+  font-size: 18px;
+  font-family: 'Brown-Bold';
+  color: #fff;
+  background-color: #206db0;
+  background-image: linear-gradient(#206db0 0%,#185386 100%);
+}
+
+@media (min-width:751px) {
+  .right {float: right; width: 64%;}
+  .left {float: left; width: 33%; box-shadow: 0px 0px 5px #aaa;}
+}
+
+@media (max-width:750px) {
+  .monitor {display: none;}
+}
+
+
+</style>
+
 </head>
-<body>
+<body style="padding: 0px; margin: 0px; background-color: #ddd;">
+
+<div style="max-width: 1000px; margin: auto;">
+
+<div id="secondaryContent" style="background-color: #fff; padding: 8px; margin:0px;">
+	<%= render 'common/session' %>
+</div>
+
+<% if @title %>
+<div style="margin-top: 0px; background-color: #5588cc;">
+  <img class="monitor" src="http://i.imgur.com/THa9tYB.png" style="width:100%; opacity: 0.75;" />
+<h1 style="margin: 0px; text-align: center; line-height: 1.2em; font-family: 'Georgia'; color: #fff; text-shadow: -2px -1px 0 #206eb1;"> 
+	<%= @title %>
+</h1>
+</div>
+<% end %>
+
+<div style="max-width: 1024px; padding: 24px; margin: auto; background-color: #fff;">
+<div style="min-height: 600px;">
+
+<% if flash[:notice] %>
+<h2 style="text-align:center;color:#7f7;">
+  <%= flash[:notice] %><br/>
+</h2>
+<% end %>
+
+<% if flash[:error] %>
+<h2 style="text-align:center;color:#f77;">
+  <%= flash[:error] %><br/>
+</h2>
+<% end %>
 
 <%= yield %>
+
+</div>
+
+<hr/>
+
+<p style="text-align: right;">
+	<a href="https://github.com/mg41/hackvt2013" target="_blank">About</a>
+	 | <a href="https://github.com/mg41/hackvt2013" target="_blank">Github</a>
+</p>
+
+</div>
+
+</div>
+
+<img src="http://i.imgur.com/Jvgnd1Q.jpg" style="width:100%; opacity: 0.5;" />
+
+<script>
+
+function isValidUSZip(sZip) {
+   return /^\d{5}(-\d{4})?$/.test(sZip);
+}
+
+function isValidEmail(email) { 
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+} 
+
+$("#new_vote").submit(function( event ) {
+  var email = $("#vote_email").val();
+  var zip = $("#vote_zip").val();
+  if (isValidEmail(email) == false) {
+    $("#vote_email").val("");
+    $("#vote_email").attr("placeholder","Email is invalid");
+    $("#vote_email").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if ( email == "") {
+    $("#vote_email").attr("placeholder","Required");
+    $("#vote_email").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if (isValidUSZip(zip) == false) {
+    $("#vote_zip").val("");
+    $("#vote_zip").attr("placeholder","Zip code is invalid");
+    $("#vote_zip").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+  if ( zip == "") {
+    $("#vote_zip").attr("placeholder","Required");
+    $("#vote_zip").css("background-color","#ffcccc");
+    event.preventDefault();
+  }
+});
+</script>
+
 
 </body>
 </html>
