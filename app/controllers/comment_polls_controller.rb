@@ -1,0 +1,2 @@
+class CommentPollsController < ApplicationController
+end

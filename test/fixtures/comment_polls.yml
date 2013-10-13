@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: MyString
+  user: MyString
+  bill: MyString
+  question: MyString
+  has_many: MyString
+  : 
+
+two:
+  id: MyString
+  user: MyString
+  bill: MyString
+  question: MyString
+  has_many: MyString
+  : 
