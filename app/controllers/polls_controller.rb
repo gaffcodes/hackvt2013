@@ -15,13 +15,11 @@ def index
   @links = []
   @authors = []
   @polls.each do |poll|
-    bill = poll.bill.gsub('_', '%20')
+    bill = poll.bill.gsub(/[ ]/, '%20')
     @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + bill + "?apikey=6ecd5cf05848442289647eae66e51a17"
     @results = HTTParty.get(@uri)
     @titles << JSON.parse(@results.body)["title"].to_s
-    puts @titles
     @links << JSON.parse(@results.body)["sources"][0]["url"]
-    puts @links
     @authors << JSON.parse(@results.body)["sponsors"]
   end
   end
@@ -37,11 +35,10 @@ def index
     @for = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 't'").count
     @against = Vote.where("bill_id = '#{@poll.bill}'").where("in_favor = 'f'").count
 #SR%207/?apikey=7d29214ca63e4afc9fa16a32360679d5
-    @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + @poll.bill.gsub('_','%20') + "?apikey=7d29214ca63e4afc9fa16a32360679d5"
-    puts @uri
+    @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + @poll.bill.gsub(/[ ]/,'%20') + "?apikey=7d29214ca63e4afc9fa16a32360679d5"
     @results = HTTParty.get(@uri)
     puts @results
-    @title = @poll.bill.gsub('_',' ') + ": " +  JSON.parse(@results.body)["title"].to_s
+    @title = @poll.bill.gsub(/[_]/,' ') + ": " +  JSON.parse(@results.body)["title"].to_s
     @link = JSON.parse(@results.body)["sources"][0]["url"]
     @authors = JSON.parse(@results.body)["sponsors"]
     
