@@ -6,5 +6,5 @@ class Comment < ActiveRecord::Base
 	
 	validates_presence_of :user_email
 	
-	attr_accessible :user_id, :poll_id, :text, :created_at, :updated_at, :user_email
+	attr_accessible :user_id, :poll_id, :text, :created_at, :updated_at, :user_email, :comment_polls, :comment_id
 end

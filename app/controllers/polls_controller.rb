@@ -27,6 +27,7 @@ def index
   # GET /polls/1
   # GET /polls/1.json
   def show
+    #SHOULD I REALLY BE CREATING A NEW VOTE EVERYTIME I SHOW THE PAGE???!?!?!?!?!?
     @vote = Vote.new
     @vote.poll_id = params[:id]
     @vote.bill_id = @poll.bill
