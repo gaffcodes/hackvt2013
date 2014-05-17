@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   before_action :set_vote, only: [:show, :edit, :update, :destroy]
-
+  #TODO let users see all of their votes, and change their votes
   # GET /votes
   # GET /votes.json
   def index

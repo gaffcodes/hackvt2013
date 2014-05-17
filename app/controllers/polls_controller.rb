@@ -9,6 +9,10 @@ class PollsController < ApplicationController
 
   # GET /polls
   # GET /polls.json
+#   TODO Still need to add a page that shows all bills, separate from the list of all polls; this might require new controller and table
+  #TODO notify people who attempt to vote twice that voting twice not allowed
+  #TODO let people vote without using the form, i.e., by just being logged in; eventually, use Facebook as login method (provides some verification)
+  
 def index
   @polls = Poll.all
   @titles = []
@@ -17,6 +21,7 @@ def index
   @polls.each do |poll|
     bill = poll.bill.gsub(/[ ]/, '%20')
     @uri = "http://openstates.org/api/v1/bills/vt/2013-2014/" + bill + "?apikey=6ecd5cf05848442289647eae66e51a17"
+    puts(@uri)
     @results = HTTParty.get(@uri)
     @titles << JSON.parse(@results.body)["title"].to_s
     @links << JSON.parse(@results.body)["sources"][0]["url"]
